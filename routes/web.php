@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+Route::get('/', [HomeController::class,'index'])->name("main");
+Route::get('/register', [RegisterController::class,'showRegister'])->name("register.show");
+Route::post('/register', [RegisterController::class,'postRegister'])->name('register.new');
+
