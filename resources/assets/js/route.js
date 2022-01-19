@@ -2,9 +2,10 @@ import VueRouter from 'vue-router';
 
 let routes = [
     {
-        path: '/order-status',
+        path: '/',
+        name:'',
         components:{
-            main: require('./components/OrderStatus.vue').default,
+            main: require('./components/register.vue').default,
         }
     }
 ];

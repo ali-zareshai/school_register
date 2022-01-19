@@ -11,51 +11,103 @@ window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
 import router from './route';
-import VueMask from 'v-mask'
+import VueMask from 'v-mask';
 
-
-import '@progress/kendo-ui'
-import '@progress/kendo-theme-default/dist/all.css'
-import { Grid, GridInstaller } from '@progress/kendo-grid-vue-wrapper'
-import { DataSourceInstaller } from '@progress/kendo-datasource-vue-wrapper'
+import "@progress/kendo-ui";
+import "@progress/kendo-theme-default/dist/all.css";
+import { Grid, GridInstaller } from "@progress/kendo-grid-vue-wrapper";
+import { DataSourceInstaller } from "@progress/kendo-datasource-vue-wrapper";
 // import { TimePicker } from 'uiv'
-import * as uiv from 'uiv'
+import "@progress/kendo-ui/js/messages/kendo.messages.fa-IR.js";
+import * as uiv from "uiv";
 
-Vue.use(uiv)
+import VueIziToast from 'vue-izitoast';
+import "izitoast/dist/css/iziToast.min.css";
+import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
+import {MultiSelect,DropdownsInstaller} from '@progress/kendo-dropdowns-vue-wrapper';
 
-Vue.use(GridInstaller)
-Vue.use(VueMask)
+
+Vue.use(uiv);
+Vue.use(VueIziToast);
+Vue.use(GridInstaller);
+Vue.use(VueMask);
 Vue.use(DataSourceInstaller);
-import * as VeeValidate from 'vee-validate';
+Vue.use(DropdownsInstaller);
+Vue.component('date-picker', VuePersianDatetimePicker);
+import VeeValidate, { Validator } from "vee-validate";
+
+import fa from 'vee-validate/dist/locale/fa';
 
 
-Validator.extend('irani', {
-    getMessage: field => field + ' صحیح نمی باشد.',
-    validate: code => {
-        var L = code.length;
-        if (L != 10 || parseInt(code, 10) == 0) return false;
-        code = ('0000' + code).substr(L + 4 - 10);
-        if (parseInt(code.substr(3, 6), 10) == 0) return false;
-        var c = parseInt(code.substr(9, 1), 10);
-        var s = 0;
-        for (var i = 0; i < 9; i++)
-            s += parseInt(code.substr(i, 1), 10) * (10 - i);
-        s = s % 11;
-        return (s < 2 && c == s) || (s >= 2 && c == (11 - s));
+const locale = {
+    name: "fa",
+    messages: fa.messages,
+    attributes: {
+        'name':'نام',
+        'post_code':'کد پستی',
+        'ssn':'کد ملی',
+        'address':'آدرس',
+        'email':'ایمیل',
+        'mobile':'شماره موبایل',
+        'password':'رمز عبور',
+        'confirm_password':'تکرار پسورد',
+        'state':'استان',
+        'city':'شهر',
+        'name_fa':'نام',
+        'name_en':'نام',
+        'progress':'درصد پیشرفت',
+        'date':'تاریخ',
+        'price':'قیمت',
+        'text':'متن',
+        'title ':'عنوان',
+        'link':'لینک'
     }
+};
+
+
+Validator.extend("irani", {
+  getMessage: (field) => field + " صحیح نمی باشد.",
+  validate: (code) => {
+    var L = code.length;
+    if (L != 10 || parseInt(code, 10) == 0) return false;
+    code = ("0000" + code).substr(L + 4 - 10);
+    if (parseInt(code.substr(3, 6), 10) == 0) return false;
+    var c = parseInt(code.substr(9, 1), 10);
+    var s = 0;
+    for (var i = 0; i < 9; i++) s += parseInt(code.substr(i, 1), 10) * (10 - i);
+    s = s % 11;
+    return (s < 2 && c == s) || (s >= 2 && c == 11 - s);
+  },
 });
 
-Vue.use(VeeValidate,{fieldsBagName: 'formFields'});
 
 
+Vue.use(VeeValidate, {locale: "fa", fieldsBagName: 'formFields' });
 Vue.use(VueRouter);
-     
 
-      
-        const app = new Vue({
-            el: '#wrapper',
-            router,
-            components: {
-                Grid          
-            }
-        });
+// this.$i18n.locale = 'fr'
+// router.beforeEach((to, from, next) => {
+//   if (to.name) {
+//       if (to.name!="" && !Acl.checkAbility("view", to.name) && to.path != "/") {
+//           next('/');
+//           return;
+//       }
+//   }
+
+  // full screen pages
+  // if(to.path.startsWith("/posts/pishkan")){
+  //   $("body").addClass("mini-navbar");
+  // }
+//   next();
+// });
+
+const app = new Vue({
+  el: "#wrapper",
+  router,
+  components: {
+    Grid,
+  },
+  created() {
+    $(".main-loader").hide();
+  },
+});
