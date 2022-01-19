@@ -59,8 +59,7 @@ class PaymentController extends Controller
     {
         $message = [
             'state' =>  $status ? $this->SUCCESS_PAYMENT : $this->FAIL_PAYMENT,
-            'message'   =>  $status ? 'پرداخت با موفقیت انجام شد' : 'خطا در پرداخت',
-            'payment_type' => $invoice->payment_type
+            'message'   =>  $status ? 'پرداخت با موفقیت انجام شد' : 'خطا در پرداخت'
         ];
         return view('payments.result', compact(['message']));
     }

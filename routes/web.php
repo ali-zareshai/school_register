@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -22,7 +23,9 @@ Route::get('/register', [RegisterController::class,'showRegister'])->name("regis
 Route::post('/register', [RegisterController::class,'postRegister'])->name('register.new');//
 
 Route::group(['middleware' => ['web','auth']], function () {
-    Route::any('/payment', [PaymentController::class,'paymentNewRequest'])->name('payment.new');
+    Route::post('/payment', [PaymentController::class,'paymentNewRequest'])->name('payment.new');
+
+    Route::get('/user/payments',[UserController::class,"getCurrentUserPayments"]);
     
 });
 

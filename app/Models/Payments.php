@@ -11,4 +11,8 @@ class Payments extends BaseModel
         return $this->belongsTo(User::class,'user_id','id'); 
     }
 
+    public function student(){
+        return $this->belongsTo(Student::class,'payment_id','id'); 
+    }
+
 }
