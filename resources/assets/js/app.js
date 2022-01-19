@@ -25,8 +25,11 @@ import VueIziToast from 'vue-izitoast';
 import "izitoast/dist/css/iziToast.min.css";
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
 import {MultiSelect,DropdownsInstaller} from '@progress/kendo-dropdowns-vue-wrapper';
+import VueFormWizard from 'vue-form-wizard';
+import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 
 
+Vue.use(VueFormWizard);
 Vue.use(uiv);
 Vue.use(VueIziToast);
 Vue.use(GridInstaller);
@@ -37,6 +40,7 @@ Vue.component('date-picker', VuePersianDatetimePicker);
 import VeeValidate, { Validator } from "vee-validate";
 
 import fa from 'vee-validate/dist/locale/fa';
+
 
 
 const locale = {
@@ -60,7 +64,18 @@ const locale = {
         'price':'قیمت',
         'text':'متن',
         'title ':'عنوان',
-        'link':'لینک'
+        'link':'لینک',
+        'kelas':'مقطع',
+        'gender':'جنسیت',
+        'family_name':'نام خانوادگی',
+        'student_father_name':'نام پدر',
+        'meli_code':'کد ملی',
+        'serial_ssn':'سریال شناسنامه',
+        'city_ssn':'محل صدور',
+        'several_children':'چندمین فرزند',
+        'father_type':'نوع والد',
+        'father_name':'نام پدر',
+        
     }
 };
 
@@ -83,6 +98,7 @@ Validator.extend("irani", {
 
 
 Vue.use(VeeValidate, {locale: "fa", fieldsBagName: 'formFields' });
+Validator.localize('fa', locale);
 Vue.use(VueRouter);
 
 // this.$i18n.locale = 'fr'

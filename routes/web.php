@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -26,6 +27,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::post('/payment', [PaymentController::class,'paymentNewRequest'])->name('payment.new');
 
     Route::get('/user/payments',[UserController::class,"getCurrentUserPayments"]);
+    Route::post('/student',[StudentController::class ,'addStudent']);
     
 });
 

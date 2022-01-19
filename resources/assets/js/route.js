@@ -7,6 +7,13 @@ let routes = [
         components:{
             main: require('./components/register.vue').default,
         }
+    },
+    {
+        path: '/form',
+        name:'',
+        components:{
+            main: require('./components/form.vue').default,
+        }
     }
 ];
 

@@ -18,8 +18,8 @@ class CreateStudentsTable extends Migration
             $table->integer('user_id');
             $table->integer('payment_id');
 
-            $table->tinyInteger('kelas');
-            $table->tinyInteger('gender');
+            $table->string('kelas');
+            $table->string('gender');
             $table->string('name');
             $table->string('family_name');
             $table->string('student_father_name');
@@ -29,9 +29,9 @@ class CreateStudentsTable extends Migration
             $table->timestamp('birth_date');
             $table->tinyInteger('several_children');
             $table->string('old_school')->nullable();
-            $table->tinyInteger('other_childern')->default(0);
+            $table->string('other_childern')->nullable();
 
-            $table->tinyInteger('father_type')->default(0);
+            $table->string('father_type')->nullable();
             $table->string('father_name');
             $table->string('father_family_name');
             $table->string('father_father_name');
@@ -40,7 +40,7 @@ class CreateStudentsTable extends Migration
             $table->string("father_serial_ssn");
             $table->string('father_city_ssn');
             $table->timestamp('father_birth_date');
-            $table->tinyInteger('father_education');
+            $table->string('father_education');
             $table->tinyInteger("father_job_type");
             $table->string("father_job")->nullable();
             $table->text("father_job_address")->nullable();
@@ -56,7 +56,7 @@ class CreateStudentsTable extends Migration
             $table->string("mother_serial_ssn");
             $table->string('mother_city_ssn');
             $table->timestamp('mother_birth_date');
-            $table->tinyInteger('mother_education');
+            $table->string('mother_education');
             $table->tinyInteger("mother_job_type");
             $table->string("mother_job")->nullable();
             $table->text("mother_job_address")->nullable();
